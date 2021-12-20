@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.warpper{
+  max-width: 1230px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}

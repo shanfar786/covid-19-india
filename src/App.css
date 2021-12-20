@@ -12,7 +12,20 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+#grid {
+  gap:10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+#grid div{
+  width: 32.6%;
+  border-radius: 5px;
+}
+.card{
+color: 18rem;
+background-color: #f5f5f4;
+padding: 15px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
