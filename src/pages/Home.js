@@ -13,11 +13,6 @@ class Home extends React.Component {
         DataisLoaded: false
     };
   }
-
-  handleClick(event){
-    console.log(this); // 'this' is undefined
-  }
-  
     componentDidMount() {
                    fetch("https://data.covid19india.org/v4/min/data.min.json")
                   .then((res) => res.json())
@@ -32,11 +27,17 @@ class Home extends React.Component {
                 DataisLoaded: true
             });
             console.log(this.state.data); 
-       console.log(this.state.data.meta); 
-            
-        })
+       console.log(this.state.data.meta);          
+        })   
 }     
-
+        onInput = e => this.setState({ [e.target.stateId]: e.target.stateId });
+        onFocus = e => e.target.parentNode.parentNode.classList.add('focus');
+         onBlur = e => e.target.parentNode.parentNode.classList.remove('focus');
+  // Select item
+      onClickItem = item => this.setState({
+    search: "",
+    color: item
+  });
 
   render() {
 
@@ -46,12 +47,16 @@ class Home extends React.Component {
         <div className="container">
         <div className="filter">
          <div className="control ">
-                <input className="input form-control" 
-                // onChange={handleInput} 
-                // onKeyPress={handleInputPressed} 
-                onClick={(e) => this.handleClick(e)}
-                type="text" 
-                placeholder="state" />
+         <input
+              id="search"
+              type="search"
+              value={this.state.search}
+              placeholder="Search a color by name..."
+               onChange={this.onInput}
+               onFocus={this.onFocus}
+              onBlur={this.onBlur}
+              autocomplete="off"
+            /><i class="fas fa-search"></i>
             </div>
             <div className="date-filter">
             <select className="form-control">

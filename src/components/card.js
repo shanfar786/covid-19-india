@@ -7,11 +7,8 @@ class Card extends React.Component {
   constructor(props){ 
           super(props) 
 
-          console.log("this.props.info", this.props.info)
+         // console.log("this.props.info", this.props.info)
           this.state = {
-              // confirmed: this.props.info.total.confirmed,
-              // recovered: this.props.info.total.recovered,
-              // deceased: this.props.info.total.deceased,
               districts: this.props.info?.districts ? Object.keys(this.props.info?.districts).map((key) => {
                 return {
                   districtName: key,
@@ -20,15 +17,7 @@ class Card extends React.Component {
               }) : [],
               selectedDistrict: null
           } 
-          // this.updateState = this.updateState.bind(this) 
           }
-          // updateState(e){ 
-          // this.setState({
-          //      confirmed: this.props.info.d.total.confirmed,
-          //      recovered: this.props.info.d.total.recovered,
-          //      deceased: this.props.info.d.total.deceased
-          //   }) ;
-          //   }
 
           renderStateDetails() {
             if(this.state.selectedDistrict) {

@@ -1,10 +1,31 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
  import { useLocation } from 'react-router-dom';
 
 export default function Covid() {
+
     
     const location = useLocation();
-    console.log(location.state.stateId);
+    const [stateDetail,setStateDetail] = useState({});
+    const [details,setDetails] = useState(null);
+    const {stateId}=location.state
+    
+
+    useEffect(() => {
+    fetch("https://data.covid19india.org/v4/min/timeseries.min.json")
+   .then((res) => res.json())
+   .then((json) => {
+   const statedata =  Object.keys(json).map((s) => ({
+   stateNameId: s,
+        ...json[s]
+        }))
+
+    setDetails(statedata)  })}, []);
+    
+        useEffect(() => {
+           setStateDetail( details?.find(item => item.stateNameId == stateId))
+        }, [details,location])
+
+    console.log(stateDetail);
     return (
         <div>
         <div className="filter-block">
@@ -32,20 +53,35 @@ export default function Covid() {
         </div>
         </div>
         <div className="container">
-      <table>
-     <tbody>
+      <table >
+     <thead>
       <tr>
-        <th>Date</th>
-        <th>Confirmed</th>
-        <th>Recovered</th>
+        <td>Dates</td>
+        <td>Confirmed</td>
+         <th>Recovered</th>
         <th>Deceased</th>
         <th>Delta</th>
-        <th>Delta 7</th>
+        <th>Delta 7</th> 
       </tr>
-      <tr>
-        <td>Peter</td>
-        <td>Griffin</td>
-      </tr>
+      </thead>
+      <tbody>
+         {stateDetail?.dates && Object.keys(stateDetail?.dates).map((s) =>  
+         <tr><td key={s} value={s}>{s}</td>
+         <td key={s}>{stateDetail?.dates[s]?.total?.confirmed}</td> 
+         <td >{stateDetail?.dates[s]?.total?.recovered}</td>   
+         <td >{stateDetail?.dates[s]?.total?.deceased}</td>  
+         <td ><div>
+             <p>Confirmed :{stateDetail?.dates[s]?.delta?.confirmed}</p>
+             <p>Recovered :{stateDetail?.dates[s]?.delta?.recovered}</p>
+             <p>deceased :{stateDetail?.dates[s]?.delta?.deceased}</p>
+             </div></td>  
+         <td ><div>
+             <p>Confirmed :{stateDetail?.dates[s]?.delta7?.confirmed}</p>
+             <p>Recovered :{stateDetail?.dates[s]?.delta7?.recovered}</p>
+             <p>deceased :{stateDetail?.dates[s]?.delta7?.deceased}</p>
+             </div></td>  
+         </tr>
+        )} 
       </tbody>
       </table>
       </div>
