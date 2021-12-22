@@ -4,6 +4,7 @@ import Head from "./components/head";
 import './App.css';
 import Home from "./pages/Home";
 import Covid from "./pages/covid";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/covid-details/:stateId" element={<Covid />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

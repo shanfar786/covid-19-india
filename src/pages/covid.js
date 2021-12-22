@@ -52,8 +52,9 @@ export default function Covid() {
             </div>
         </div>
         </div>
-        <div className="container">
-      <table >
+        <div className="covid-block">
+        <div className="container ">
+      <table className="table-covid">
      <thead>
       <tr>
         <td>Dates</td>
@@ -84,6 +85,7 @@ export default function Covid() {
         )} 
       </tbody>
       </table>
+      </div>
       </div>
       </div>
     )
